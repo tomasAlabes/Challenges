@@ -1,3 +1,4 @@
 out/
 scala/*.iml
 .idea/
+ruby/*.iml
