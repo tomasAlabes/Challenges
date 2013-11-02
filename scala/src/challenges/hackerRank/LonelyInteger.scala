@@ -1,3 +1,5 @@
+package challenges.hackerRank
+
 import scala.collection.mutable
 
 /*
