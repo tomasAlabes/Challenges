@@ -33,12 +33,12 @@ class Node(private var _data:Int) {
     while (node.next.nonEmpty) {
       if (node.next.get.data == data) {
         node.next = node.next.get.next.get
-        return Some(head) /* head didn't change */
+        return Some(head) // head didn't change
       }
       node = node.next.get
     }
 
-    None //not found
+    None // not found
   }
 
   override def toString:String = {
