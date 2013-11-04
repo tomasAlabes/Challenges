@@ -13,7 +13,7 @@ class Node
     new_node = Node.new(data)
     this = self
 
-    while this.next != nil
+    until this.next == nil
       this = this.next
     end
 
@@ -21,22 +21,42 @@ class Node
 
   end
 
-  def delete_node (head, data)
+  def delete_node (data)
 
-    node = head
+    node = self
     if node.data == data
-        return head.next
+        return self.next
     end
 
-    while node.next != nil
+    until node.next == nil
       if node.next.data == data
         node.next = node.next.next
-        return head # head didn't change
+        return self # head didn't change
       end
       node = node.next
     end
 
     nil # not found
+
+  end
+
+  def remove_duplicates
+    datas = [@data]
+    this = self
+
+    until this.next == nil
+
+      next_node = this.next
+
+      if datas.include?(next_node.data)
+        this.next = next_node.next
+      else
+        datas.push(next_node.data)
+      end
+
+      this = next_node
+
+    end
 
   end
 
@@ -50,7 +70,10 @@ end
 n1 = Node.new(1)
 n1.append_to_tail(3)
 n1.append_to_tail(2)
+n1.append_to_tail(2)
 
-n1.delete_node(n1, 3)
+n1.delete_node(3)
+
+n1.remove_duplicates()
 
 n1.to_s

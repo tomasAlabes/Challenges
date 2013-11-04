@@ -26,16 +26,16 @@ class Node(private var _data:Int) {
 
   }
 
-  def deleteNode(head:Node, data:Int):Option[Node] = {
-    var node:Node = head
+  def deleteNode(data:Int):Option[Node] = {
+    var node:Node = this
     if(node.data == data){
-      return head.next
+      return this.next
     }
 
     while (node.next.nonEmpty) {
       if (node.next.get.data == data) {
         node.next = node.next.get.next
-        return Some(head) // head didn't change
+        return Some(this) // head didn't change
       }
       node = node.next.get
     }
@@ -87,7 +87,7 @@ object LinkedListMain {
     n1.appendToTail(2)
     n1.appendToTail(2)
 
-    n1.deleteNode(n1, 3)
+    n1.deleteNode(3)
 
     n1.removeDuplicates()
 
