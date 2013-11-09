@@ -38,6 +38,11 @@ class NodeTest extends FunSuite with BeforeAndAfter {
     assert(nth.get.size == 2)
   }
 
+  test("get last 20 nodes") {
+    val nth:Option[Node] = n1.nthToLast(20)
+    assert(nth.isEmpty)
+  }
+
   test("delete first node") {
     assert(n1.delete())
     assert(n1.size == 5)
@@ -45,7 +50,14 @@ class NodeTest extends FunSuite with BeforeAndAfter {
   }
 
   test("delete last node") {
-    assert(!n1.nthToLast(1).get.delete())
+    val lastNode: Node = n1.nthToLast(1).get
+    assert(!lastNode.delete())
+  }
+
+  test("sum lists") {
+    val lastNode: Node = n1.nthToLast(3).get
+    // 542231 + 542 = 542773
+    assert(542773 == LinkedListUtil.sumLists(n1, lastNode))
   }
 
 }

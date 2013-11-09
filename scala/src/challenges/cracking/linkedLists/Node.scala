@@ -119,3 +119,35 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
   }
 
 }
+
+object LinkedListUtil {
+
+  def sumLists(list1:Node, list2:Node):Int = {
+    var current = list1
+    var n1:Int = 0
+    var n2:Int = 0
+
+    val n:StringBuilder = new StringBuilder
+    n.append(current.data)
+    while (current.next.nonEmpty){
+      n.append(current.next.get.data)
+      current = current.next.get
+    }
+
+    n1 = n.toString().reverse.toInt
+
+    current = list2
+    n.clear()
+    n.append(current.data)
+    while (current.next.nonEmpty){
+      n.append(current.next.get.data)
+      current = current.next.get
+    }
+
+    n2 = n.toString().reverse.toInt
+
+    n1 + n2
+
+  }
+
+}
