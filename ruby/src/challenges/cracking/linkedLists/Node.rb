@@ -111,3 +111,31 @@ class Node
   end
 
 end
+
+class Linked_List_Utils
+
+  def self.sum_linked_lists(list1, list2) #static method
+    raise ArgumentError, 'Neither list can be nil' if list1.nil? or list2.nil?
+    current = list1
+    str_num = list1.data.to_s
+
+    until current.next.nil?
+      str_num.concat(current.next.data.to_s)
+      current = current.next
+    end
+    n1 = str_num.to_s.reverse.to_i
+
+    current = list2
+    str_num = list2.data.to_s
+
+    until current.next.nil?
+      str_num.concat(current.next.data.to_s)
+      current = current.next
+    end
+    n2 = str_num.to_s.reverse.to_i
+
+    return (n1 + n2)
+
+  end
+
+end

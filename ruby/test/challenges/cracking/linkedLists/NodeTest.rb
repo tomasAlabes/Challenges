@@ -42,7 +42,12 @@ class NodeTest < Test::Unit::TestCase
 
     assert_equal(5, @n1.size)
     assert_equal(3, @n1.data)
+  end
 
+  def test_sum_lists
+    last_two = @n1.nth_to_last(3)
+    # 542231 + 542 = 542773
+    assert_equal(542773, Linked_List_Utils.sum_linked_lists(@n1, last_two))
   end
 
 end
