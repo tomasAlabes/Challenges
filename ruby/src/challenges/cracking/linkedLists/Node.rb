@@ -60,6 +60,27 @@ class Node
 
   end
 
+  def nth_to_last(n)
+    this = self
+
+    return nil if n < 1
+
+    p1 = p2 = this
+
+    (n - 1).times { # skip n-1 steps ahead
+      return nil if p2 == nil # not found since list size < n }
+      p2 = p2.next
+    }
+
+    until p2.next == nil
+      p1 = p1.next
+      p2 = p2.next
+    end
+
+    p1
+
+  end
+
   def to_s
     puts data
     puts @next.data if @next != nil
@@ -68,12 +89,16 @@ class Node
 end
 
 n1 = Node.new(1)
-n1.append_to_tail(3)
-n1.append_to_tail(2)
-n1.append_to_tail(2)
+n1.append_to_tail 3
+n1.append_to_tail 2
+n1.append_to_tail 2
+n1.append_to_tail 4
+n1.append_to_tail 5
 
-n1.delete_node(3)
+n1.delete_node 3
 
 n1.remove_duplicates()
 
 n1.to_s
+
+puts (n1.nth_to_last 2).to_s
