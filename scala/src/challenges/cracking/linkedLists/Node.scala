@@ -66,6 +66,26 @@ class Node(private var _data:Int) {
 
   }
 
+  def nthToLast(n:Int):Option[Node] = {
+
+    if (n < 1) return None
+
+    var p1:Option[Node] = Some(this)
+    var p2:Option[Node] = Some(this)
+
+    for (i <- 1 to n-1) {
+      if (p2.isEmpty) return None
+      p2 = p2.get.next
+    }
+
+    while (p2.get.next.nonEmpty) {
+      p1 = p1.get.next
+      p2 = p2.get.next
+    }
+
+    p1
+
+  }
 
   override def toString:String = {
     println(data)
@@ -86,12 +106,17 @@ object LinkedListMain {
     n1.appendToTail(3)
     n1.appendToTail(2)
     n1.appendToTail(2)
+    n1.appendToTail(4)
+    n1.appendToTail(5)
 
     n1.deleteNode(3)
 
     n1.removeDuplicates()
 
     n1.toString
+
+    println("\n")
+    n1.nthToLast(2).get.toString
 
   }
 
