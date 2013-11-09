@@ -13,11 +13,23 @@ class Node
     new_node = Node.new(data)
     this = self
 
-    until this.next == nil
+    until this.next.nil?
       this = this.next
     end
 
     this.next = new_node
+
+  end
+
+  def size
+    count = 1
+    current = @next
+    until current.nil?
+      count+=1
+      current = current.next
+    end
+
+    count
 
   end
 
@@ -28,7 +40,7 @@ class Node
         return self.next
     end
 
-    until node.next == nil
+    until node.next.nil?
       if node.next.data == data
         node.next = node.next.next
         return self # head didn't change
@@ -44,7 +56,7 @@ class Node
     datas = [@data]
     this = self
 
-    until this.next == nil
+    until this.next.nil?
 
       next_node = this.next
 
@@ -68,16 +80,28 @@ class Node
     p1 = p2 = this
 
     (n - 1).times { # skip n-1 steps ahead
-      return nil if p2 == nil # not found since list size < n }
+      return nil if p2.nil? # not found since list size < n }
       p2 = p2.next
     }
 
-    until p2.next == nil
+    until p2.next.nil?
       p1 = p1.next
       p2 = p2.next
     end
 
     p1
+
+  end
+
+  def delete
+    return false if self.next.nil?
+
+    next_node = self.next
+
+    @next = next_node.next
+    @data = next_node.data
+
+    true
 
   end
 
@@ -87,18 +111,3 @@ class Node
   end
 
 end
-
-n1 = Node.new(1)
-n1.append_to_tail 3
-n1.append_to_tail 2
-n1.append_to_tail 2
-n1.append_to_tail 4
-n1.append_to_tail 5
-
-n1.delete_node 3
-
-n1.remove_duplicates()
-
-n1.to_s
-
-puts (n1.nth_to_last 2).to_s

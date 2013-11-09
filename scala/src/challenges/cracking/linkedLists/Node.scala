@@ -2,16 +2,16 @@ package challenges.cracking.linkedLists
 
 import scala.collection.mutable.ListBuffer
 
-class Node(private var _data:Int) {
+class Node(private var _data:Int) { // typical private field in class, with '_' because of later data fn
 
   private var _next:Option[Node] = None
 
-  def next:Option[Node] = _next
-  def next_= (newNext:Option[Node]) = {
+  def next:Option[Node] = _next // public getter
+  def next_= (newNext:Option[Node]) = { // public setter, the '_' are conventions
     _next = newNext
   }
 
-  def data:Int = _data
+  def data:Int = _data //public getter
 
   def appendToTail(data: Int) = {
 
@@ -24,6 +24,18 @@ class Node(private var _data:Int) {
 
     self.next = Some(end)
 
+  }
+
+  def size():Int = {
+    var count: Int = 1
+    var current: Option[Node] = this.next
+
+    while(current.nonEmpty){
+      count+=1
+      current = current.get.next
+    }
+
+    count
   }
 
   def deleteNode(data:Int):Option[Node] = {
@@ -87,37 +99,23 @@ class Node(private var _data:Int) {
 
   }
 
+  def delete():Boolean = {
+    if (this.next.isEmpty) return false
+
+    val next = this.next.get
+
+    this._data = next.data
+    this.next = next.next
+
+    true
+  }
+
   override def toString:String = {
     println(data)
     if (_next.nonEmpty) {
       _next.get.toString
     }
     data.toString
-  }
-
-}
-
-
-object LinkedListMain {
-
-  def main(args: Array[String]) {
-    val n1:Node = new Node(1)
-
-    n1.appendToTail(3)
-    n1.appendToTail(2)
-    n1.appendToTail(2)
-    n1.appendToTail(4)
-    n1.appendToTail(5)
-
-    n1.deleteNode(3)
-
-    n1.removeDuplicates()
-
-    n1.toString
-
-    println("\n")
-    n1.nthToLast(2).get.toString
-
   }
 
 }
