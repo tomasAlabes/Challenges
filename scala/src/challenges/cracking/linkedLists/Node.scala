@@ -2,18 +2,18 @@ package challenges.cracking.linkedLists
 
 import scala.collection.mutable.ListBuffer
 
-class Node(private var _data:Int) { // typical private field in class, with '_' because of later data fn
+class Node(private var _data:Int) extends LinkedNode { // typical private field in class, with '_' because of later data fn
 
   private var _next:Option[Node] = None
 
-  def next:Option[Node] = _next // public getter
-  def next_= (newNext:Option[Node]) = { // public setter, the '_' are conventions
+  override def next:Option[Node] = _next // public getter
+  override def next_= (newNext:Option[Node]) = { // public setter, the '_' are conventions
     _next = newNext
   }
 
   def data:Int = _data //public getter
 
-  def appendToTail(data: Int) = {
+  override def appendToTail(data: Int) = {
 
     val end:Node = new Node(data)
     var self:Node = this
@@ -26,7 +26,7 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
 
   }
 
-  def size():Int = {
+  override def size():Int = {
     var count: Int = 1
     var current: Option[Node] = this.next
 
@@ -38,7 +38,7 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
     count
   }
 
-  def deleteNode(data:Int):Option[Node] = {
+  override def deleteNode(data:Int):Option[Node] = {
     var node:Node = this
     if(node.data == data){
       return this.next
@@ -55,7 +55,7 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
     None // not found
   }
 
-  def removeDuplicates() = {
+  override def removeDuplicates() = {
     val datas:ListBuffer[Int] = new ListBuffer[Int]()
     var self = this
 
@@ -78,7 +78,7 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
 
   }
 
-  def nthToLast(n:Int):Option[Node] = {
+  override def nthToLast(n:Int):Option[Node] = {
 
     if (n < 1) return None
 
@@ -99,7 +99,7 @@ class Node(private var _data:Int) { // typical private field in class, with '_' 
 
   }
 
-  def delete():Boolean = {
+  override def delete():Boolean = {
     if (this.next.isEmpty) return false
 
     val next = this.next.get
